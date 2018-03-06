@@ -1,15 +1,16 @@
 let endpoint = "https://swapi.co/api/films/";
 let $container = $('#movie-container');
 
-const showPerformers = characters => {
-	let character = " ";
-	characters.forEach(function (performer){
-		let urlName = performer;
-		character += `<li>
-		<p>Personaje: ${urlName}<p>
-		</li>`
+const getCharactersDetails = e => {
+	e.preventDefault();
+	console.log(e.target.innerText);
+}
+
+const addEvent = classList => {
+	let arrayClassList = Array.from(classList);
+	arrayClassList.forEach(element => {
+		element.addEventListener('click', getCharactersDetails);
 	})
-	$performers.html(character);
 }
 
 const showMovies = response => {
@@ -31,6 +32,8 @@ const showMovies = response => {
 		</div>`
 	});
 	$container.html(movieTemplate);
+	let classList = document.getElementsByClassName('character-list');
+	addEvent(classList);
 }
 
 const handleError = () => {
