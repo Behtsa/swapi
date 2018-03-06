@@ -3,6 +3,14 @@ body {
 	color: white;
 }
 
+.character {
+	color: black;
+}
+
 .wrapper {
 	border: 2px solid yellow;
+}
+
+h4 {
+	color: black !important;
 }

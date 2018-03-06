@@ -1,9 +1,24 @@
 let endpoint = "https://swapi.co/api/films/";
 let $container = $('#movie-container');
+const modal = result => {
+	console.log(result);
+	$('#myModal').modal('show');
+	$('.modal-title').text(result.name);
+	$('#height').text('Height: '+ result.height);
+	$('#mass').text('Mass: '+ result.mass);
+	$('#hair').text('Hair color: '+ result.hair_color);
+	$('#skin').text('Skin color: '+ result.skin_color);
+}
 
 const getCharactersDetails = e => {
 	e.preventDefault();
-	console.log(e.target.innerText);
+	let charEndpoint = e.target.innerText;
+	fetch(charEndpoint)
+		.then(response => {
+			response.json().then(result => {
+				modal(result);
+			})
+		})
 }
 
 const addEvent = classList => {
@@ -14,8 +29,8 @@ const addEvent = classList => {
 }
 
 const showMovies = response => {
+	console.log(response);
 	let films = response.results;
-	//console.log(films);
 	let movieTemplate = ` `;
 	let charactersTemplate = ` `;
 	films.forEach(function(film){
@@ -39,13 +54,6 @@ const showMovies = response => {
 const handleError = () => {
 	console.log("eror");
 }
-
-// fetch("https://swapi.co/api/films/")
-// .then()
-// .catch(function(err){
-// 	console.log("There is an error")
-// })
-
 
 loadPage = () => {
     $.ajax({
